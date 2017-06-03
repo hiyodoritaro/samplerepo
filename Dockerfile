@@ -1,16 +1,10 @@
-FROM ubuntu:14.04
+FROM hiyodoritaro/winguisample:1.0
 
-RUN apt-get update && apt-get install -y firefox
+MAINTAINER hiyodoritaro
 
-# Replace 1000 with your user / group id
-RUN export uid=1000 gid=1000 && \
-    mkdir -p /home/developer && \
-    echo "developer:x:${uid}:${gid}:Developer,,,:/home/developer:/bin/bash" >> /etc/passwd && \
-    echo "developer:x:${uid}:" >> /etc/group && \
-    echo "developer ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/developer && \
-    chmod 0440 /etc/sudoers.d/developer && \
-    chown ${uid}:${gid} -R /home/developer
+WORKDIR /home/wineuser
+RUN ["wget", "https://osdn.net/projects/sevenzip/downloads/67620/7z1700-x64.exe"]
+RUN ["wine", "7z1700-x64.exe", "/S"]
 
-USER developer
-ENV HOME /home/developer
-CMD /usr/bin/firefox
+CMD /bin/bash
+
