@@ -1,10 +1,8 @@
-FROM hiyodoritaro/winguisample:1.0
+FROM hiyodoritaro/samplerepo:2.0
 
 MAINTAINER hiyodoritaro
 
-WORKDIR /home/wineuser
-RUN ["wget", "https://osdn.net/projects/sevenzip/downloads/67620/7z1700-x64.exe"]
-RUN ["wine", "7z1700-x64.exe", "/S"]
+RUN ["sudo", "apt-get", "install", "x11-apps", "-y"]
 
 CMD /bin/bash
 
